@@ -31,6 +31,14 @@ class TestCase(unittest.TestCase):
         self.assertEqual(task.my_datetime(num_sec), expected,\
             msg="A value of 31536000 or one year does not return 01-01-1971")
 
+    def test5(self):
+        """Checks my_datetime with a value of 94608000 or three years to test for
+        a leap year. Should return 12-31-1972."""
+        expected = '12-31-1972'
+        num_sec = 94608000
+        self.assertEqual(task.my_datetime(num_sec), expected,\
+            msg="Does not account for a leap year.")        
+
 
 if __name__ == '__main__':
     unittest.main()
