@@ -10,8 +10,14 @@ def my_datetime(num_sec):
     days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
     num_days = num_sec // SECONDS_IN_DAY
+    
+    # Calculate year
     year = 1970
-
+    while num_days >= 365:
+        num_days -= 365
+        year += 1
+        
+    # Calculate month
     month = 1
     while num_days >= days_in_month[month - 1]:
         num_days -= days_in_month[month - 1]

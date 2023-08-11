@@ -22,7 +22,14 @@ class TestCase(unittest.TestCase):
         expected = '02-01-1970'
         num_sec = 2678400
         self.assertEqual(task.my_datetime(num_sec), expected,\
-            msg="A value of 2678400 or one month does not return 02-01-1970")
+            msg="A value of 2678400 or one month does not return 02-01-1970.")
+
+    def test4(self):
+        """Checks my_datetime with a value of one year."""
+        expected = '01-01-1971'
+        num_sec = 31536000
+        self.assertEqual(task.my_datetime(num_sec), expected,\
+            msg="A value of 31536000 or one year does not return 01-01-1971")
 
 
 if __name__ == '__main__':
