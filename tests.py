@@ -147,7 +147,7 @@ class TestCase(unittest.TestCase):
     def test_conv_num_20(self):
         """check a basic hexadecimal number with un allowed decimal point"""
         self.assertEqual(task.conv_num('0x7B.0'), None)
-        
+
 
 if __name__ == '__main__':
     unittest.main()
