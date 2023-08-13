@@ -68,6 +68,86 @@ class TestCase(unittest.TestCase):
         """Checks check_leap_year with a value of 1972. Should return True"""
         self.assertTrue(task.check_leap_year(1972), msg="1972 is a leap year.")
 
+    def test_conv_num_1(self):
+        """checks an empty string, should return None"""
+        self.assertEqual(task.conv_num(''), None)
+
+    def test_conv_num_2(self):
+        """checks a base 10 integer of high value"""
+        self.assertEqual(task.conv_num('123456789'), 123456789)
+
+    def test_conv_num_3(self):
+        """checks a base 10 integer of high value that is negative"""
+        self.assertEqual(task.conv_num('-123456789'), -123456789)
+
+    def test_conv_num_4(self):
+        """checks a base 10 integer of high value with a decimal"""
+        self.assertEqual(task.conv_num('123456.789'), 123456.789)
+
+    def test_conv_num_5(self):
+        """checks a base 10 integer of that is negative with a decimal"""
+        self.assertEqual(task.conv_num('-12.3456789'), -12.3456789)
+
+    def test_conv_num_6(self):
+        """checks a base 10 integer of high value with an un allowed character at the beginning"""
+        self.assertEqual(task.conv_num('z123456789'), None)
+
+    def test_conv_num_7(self):
+        """checks a base 10 integer of high value with an un allowed character at the end"""
+        self.assertEqual(task.conv_num('123456789@'), None)
+
+    def test_conv_num_8(self):
+        """checks a base 10 integer of high value with an un allowed character in the middle"""
+        self.assertEqual(task.conv_num('12345y6789'), None)
+
+    def test_conv_num_9(self):
+        """checks a base 10 integer of high value with two consecutive decimal places"""
+        self.assertEqual(task.conv_num('..123456789'), None)
+
+    def test_conv_num_10(self):
+        """checks a base 10 integer of high value with two separate decimal places"""
+        self.assertEqual(task.conv_num('123.456789.'), None)
+
+    def test_conv_num_11(self):
+        """checks a base 10 integer of high value with two consecutive minus signs"""
+        self.assertEqual(task.conv_num('--123456789'), None)
+
+    def test_conv_num_12(self):
+        """checks a base 10 integer of high value with two separate minus signs"""
+        self.assertEqual(task.conv_num('-12345678-9'), None)
+
+    def test_conv_num_13(self):
+        """checks an integer object"""
+        self.assertEqual(task.conv_num(123), None)
+
+    def test_conv_num_14(self):
+        """checks a list object"""
+        self.assertEqual(task.conv_num([1, 2, 3]), None)
+
+    def test_conv_num_15(self):
+        """check a basic hexadecimal number"""
+        self.assertEqual(task.conv_num('0x7B'), 123)
+
+    def test_conv_num_16(self):
+        """check a basic hexadecimal number"""
+        self.assertEqual(task.conv_num('0x7B'), 123)
+
+    def test_conv_num_17(self):
+        """check a basic hexadecimal number with negative sign"""
+        self.assertEqual(task.conv_num('-0x7B'), -123)
+
+    def test_conv_num_18(self):
+        """check a basic hexadecimal number without '0x' prefix"""
+        self.assertEqual(task.conv_num('7B'), None)
+
+    def test_conv_num_19(self):
+        """check a basic hexadecimal number with un allowed characters"""
+        self.assertEqual(task.conv_num('0x7Bs'), None)
+
+    def test_conv_num_20(self):
+        """check a basic hexadecimal number with un allowed decimal point"""
+        self.assertEqual(task.conv_num('0x7B.0'), None)
+
 
 if __name__ == '__main__':
     unittest.main()
