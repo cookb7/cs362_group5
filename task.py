@@ -47,16 +47,19 @@ def conv_num(num_str):
     # return final value
     return num_int
 
+
 def get_sign(num_list):
     num_sign = 1
     if num_list[0] == "-":
         num_sign = -1
     return num_sign
 
+
 def update_num_list(num_list, num_sign):
     if num_sign == -1:
         num_list = num_list[1:]
     return num_list
+
 
 def check_str(num_list):
     for char in range(len(num_list)):
@@ -69,6 +72,7 @@ def check_str(num_list):
         else:
             return False
     return True
+
 
 def hex_conversion(num_list, num_int):
     if ord(num_list[0]) == 48:
@@ -89,6 +93,7 @@ def hex_conversion(num_list, num_int):
         return None
     return num_int
 
+
 def dec_conversion(num_list, num_int):
     for char in range(len(num_list)):
         # un allowed characters for base 10 conversions
@@ -102,6 +107,7 @@ def dec_conversion(num_list, num_int):
             num_int = num_int * 10 + digit_val
     return num_int
 
+
 def dec_point_conversion(num_list, num_int):
     dec_point = -1
     for char in range(len(num_list)):
@@ -114,8 +120,6 @@ def dec_point_conversion(num_list, num_int):
         num_int /= ratio
 
     return num_int
-
-conv_num('0x7Bs')
 
 
 def my_datetime(num_sec):
