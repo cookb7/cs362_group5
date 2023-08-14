@@ -21,10 +21,10 @@ def conv_num(num_str):
     num_list = update_num_list(num_list, num_sign)
 
     # check for multiple .'s and multiple x's and -'s
-    if num_list.count(".") > 1 or num_list.count("x") > 1 or num_list.count("-") > 1:
+    if num_list.count(".") > 1 or num_list.count("-") > 1:
         return None
 
-    # iterate through each character, returning None if char is not 0-9, a-f, x, ".", or -
+    # returning None if char is not 0-9, a-f, x, ".", or -
     valid_input = check_str(num_list)
     if valid_input is False:
         return None
@@ -64,7 +64,9 @@ def update_num_list(num_list, num_sign):
 def check_str(num_list):
     for char in range(len(num_list)):
         # if it is a digit 0-9, or it is a letter a-f, or it is a decimal point
-        if 47 < ord(num_list[char]) < 58 or 96 < ord(num_list[char]) < 103 or ord(num_list[char]) == 46:
+        if 47 < ord(num_list[char]) < 58 or 96 < ord(num_list[char]) < 103:
+            continue
+        elif ord(num_list[char]) == 46:
             continue
         # it is letter x to clarify hexadecimal input
         elif ord(num_list[char]) == 120 and char == 1:
@@ -97,12 +99,14 @@ def hex_conversion(num_list, num_int):
 def dec_conversion(num_list, num_int):
     for char in range(len(num_list)):
         # un allowed characters for base 10 conversions
-        if ord(num_list[char]) < 46 or ord(num_list[char]) > 57 or ord(num_list[char]) == 47:
+        if ord(num_list[char]) < 46 or ord(num_list[char]) > 57:
+            return None
+        elif ord(num_list[char]) == 47:
             return None
         elif ord(num_list[char]) == 46:
             continue
         else:
-            # convert each number to ordinal subtract 48 to get int and add to num_int
+            # convert to ordinal and add to num int
             digit_val = ord(num_list[char]) - 48
             num_int = num_int * 10 + digit_val
     return num_int
