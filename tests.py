@@ -189,6 +189,5 @@ class TestCase(unittest.TestCase):
         self.assertEqual(task.conv_endian(-15), '-0F')
 
 
-
 if __name__ == '__main__':
     unittest.main()
