@@ -14,9 +14,7 @@ class TestCase(unittest.TestCase):
         """Checks my_datetime that one day in seconds returns 01-02-1970."""
         expected = '01-02-1970'
         num_sec = 86400
-        self.assertEqual(task.my_datetime(num_sec), expected,
-                         msg="""A value of 86400 seconds or 1 day does not return
-                         01-02-1970.""")
+        self.assertEqual(task.my_datetime(num_sec), expected)
 
     def test_datetime_3(self):
         """Checks my_datetime with a value of one month."""
@@ -35,34 +33,37 @@ class TestCase(unittest.TestCase):
                            01-01-1971""")
 
     def test_datetime_5(self):
-        """Checks my_datetime with a value of 94608000 or three years to test for
-        a leap year. Should return 12-31-1972."""
+        """
+        Checks my_datetime with a value of 94608000 or three years to test for
+        a leap year. Should return 12-31-1972.
+        """
         expected = '12-31-1972'
         num_sec = 94608000
         self.assertEqual(task.my_datetime(num_sec), expected,
                          msg="Does not account for a leap year.")
 
     def test_datetime_6(self):
-        """Checks my_datetime with a value of 123456789. Should return 11-29-1973."""
+        """Checks my_datetime with 123456789. Should return 11-29-1973."""
         expected = '11-29-1973'
         num_sec = 123456789
         self.assertEqual(task.my_datetime(num_sec), expected,
                          msg="A value of 123456789 fails to return 11-29-1973")
 
     def test_datetime_7(self):
-        """Checks my_datetime with a value of 9876543210. Should return 12-22-2282."""
+        """
+        Checks my_datetime with a value of 9876543210. Should return 12-22-2282
+        """
         expected = '12-22-2282'
         num_sec = 9876543210
-        self.assertEqual(task.my_datetime(num_sec), expected,
-                         msg="A value of 9876543210 fails to return 12-22-2282")
+        self.assertEqual(task.my_datetime(num_sec), expected)
 
     def test_leapyear_1(self):
         """Checks check_leap_year with a value of 1970. Should return False"""
-        self.assertFalse(task.check_leap_year(1970), msg="1970 is not a leap year.")
+        self.assertFalse(task.check_leap_year(1970), msg="1970 not leap year.")
 
     def test_leapyear_2(self):
         """Checks check_leap_year with a value of 1971. Should return False"""
-        self.assertFalse(task.check_leap_year(1971), msg="1971 is not a leap year.")
+        self.assertFalse(task.check_leap_year(1971), msg="1971 not leap year")
 
     def test_leapyear_3(self):
         """Checks check_leap_year with a value of 1972. Should return True"""
@@ -89,31 +90,43 @@ class TestCase(unittest.TestCase):
         self.assertEqual(task.conv_num('-12.3456789'), -12.3456789)
 
     def test_conv_num_6(self):
-        """checks a base 10 integer of high value with an un allowed character at the beginning"""
+        """
+        checks a base 10 integer of high value with
+        an un allowed character at the beginning
+        """
         self.assertEqual(task.conv_num('z123456789'), None)
 
     def test_conv_num_7(self):
-        """checks a base 10 integer of high value with an un allowed character at the end"""
+        """
+        checks a base 10 integer of high value with
+        an un allowed character at the end
+        """
         self.assertEqual(task.conv_num('123456789@'), None)
 
     def test_conv_num_8(self):
-        """checks a base 10 integer of high value with an un allowed character in the middle"""
+        """
+        checks a base 10 integer of high value with
+        an un allowed character in the middle
+        """
         self.assertEqual(task.conv_num('12345y6789'), None)
 
     def test_conv_num_9(self):
-        """checks a base 10 integer of high value with two consecutive decimal places"""
+        """
+        checks a base 10 integer of high value
+        with two consecutive decimal places
+        """
         self.assertEqual(task.conv_num('..123456789'), None)
 
     def test_conv_num_10(self):
-        """checks a base 10 integer of high value with two separate decimal places"""
+        """checks base 10 int with two separate decimal places"""
         self.assertEqual(task.conv_num('123.456789.'), None)
 
     def test_conv_num_11(self):
-        """checks a base 10 integer of high value with two consecutive minus signs"""
+        """checks  base 10 integer with two consecutive minus signs"""
         self.assertEqual(task.conv_num('--123456789'), None)
 
     def test_conv_num_12(self):
-        """checks a base 10 integer of high value with two separate minus signs"""
+        """checks a base 10 integer with two separate minus signs"""
         self.assertEqual(task.conv_num('-12345678-9'), None)
 
     def test_conv_num_13(self):
@@ -149,7 +162,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(task.conv_num('0x7B.0'), None)
 
     def test_conv_endian_1(self):
-        """check for a conversion of a positive number with the big endian flag."""
+        """check for conversion of positive number with the big endian flag."""
         self.assertEqual(task.conv_endian(836281, 'big'), '0C C2 B9')
 
     def test_conv_endian_2(self):
@@ -157,15 +170,15 @@ class TestCase(unittest.TestCase):
         self.assertEqual(task.conv_endian(836281), '0C C2 B9')
 
     def test_conv_endian_3(self):
-        """check for a conversion of a negative number with the big endian flag."""
+        """check for conversion of negative number with big endian flag."""
         self.assertEqual(task.conv_endian(-836281), '-0C C2 B9')
 
     def test_conv_endian_4(self):
-        """check for a conversion of a positive number with the little endian flag"""
+        """check for conversion of positive number with little endian flag"""
         self.assertEqual(task.conv_endian(836281, 'little'), 'B9 C2 0C')
 
     def test_conv_endian_5(self):
-        """check for a conversion of a negative number with the little endian flag."""
+        """check for conversion of negative number with little endian flag."""
         self.assertEqual(task.conv_endian(-836281, 'little'), '-B9 C2 0C')
 
     def test_conv_endian_6(self):
