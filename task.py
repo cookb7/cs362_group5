@@ -43,4 +43,33 @@ def check_leap_year(year):
 
 
 def conv_endian(num, endian='big'):
-    pass
+    """This function converts to a hexadecimal value and determines whether
+    the endianness of the value is big or small"""
+    check = ''
+    if num < 0:
+        check = '-'
+        num = -num
+
+    # Listing of hex digits
+    hex_digits = '0123456789ABCDEF'
+    hex_store = []
+    while num:
+        hex_store.append(hex_digits[num % 16])
+        num //= 16
+    if not hex_store:
+        hex_store.append('0')
+
+    hex_string = ''.join(reversed(hex_store))
+
+    if len(hex_string) % 2 == 1:
+        hex_string = '0' + hex_string
+
+    # Splicing the list
+    sol_list = [hex_string[i:i + 2] for i in range(0, len(hex_string), 2)]
+
+    if endian == 'little':
+        sol_list = reversed(sol_list)
+    elif endian != 'big':
+        return None
+
+    return check + ' '.join(sol_list)

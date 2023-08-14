@@ -68,6 +68,46 @@ class TestCase(unittest.TestCase):
         """Checks check_leap_year with a value of 1972. Should return True"""
         self.assertTrue(task.check_leap_year(1972), msg="1972 is a leap year.")
 
+    def test_conv_endian_1(self):
+        """check for a conversion of a positive number with the big endian flag."""
+        self.assertEqual(task.conv_endian(836281, 'big'), '0C C2 B9')
+
+    def test_conv_endian_2(self):
+        """check for a conversion of a number with no flag specified."""
+        self.assertEqual(task.conv_endian(836281), '0C C2 B9')
+
+    def test_conv_endian_3(self):
+        """check for a conversion of a negative number with the big endian flag."""
+        self.assertEqual(task.conv_endian(-836281), '-0C C2 B9')
+
+    def test_conv_endian_4(self):
+        """check for a conversion of a positive number with the little endian flag"""
+        self.assertEqual(task.conv_endian(836281, 'little'), 'B9 C2 0C')
+
+    def test_conv_endian_5(self):
+        """check for a conversion of a negative number with the little endian flag."""
+        self.assertEqual(task.conv_endian(-836281, 'little'), '-B9 C2 0C')
+
+    def test_conv_endian_6(self):
+        """check for a conversion of an invalid endian type."""
+        self.assertIsNone(task.conv_endian(-836281, 'small'))
+
+    def test_conv_endian_7(self):
+        """check for a conversion of zero with the big endian flag"""
+        self.assertEqual(task.conv_endian(0, 'big'), '00')
+
+    def test_conv_endian_8(self):
+        """check for a conversion of zero with the little endian flag."""
+        self.assertEqual(task.conv_endian(0, 'little'), '00')
+
+    def test_conv_endian_9(self):
+        """check conversion of a single decimal digit."""
+        self.assertEqual(task.conv_endian(15), '0F')
+
+    def test_conv_endian_10(self):
+        """check conversion of a single negative decimal digit."""
+        self.assertEqual(task.conv_endian(-15), '-0F')
+
 
 if __name__ == '__main__':
     unittest.main()
